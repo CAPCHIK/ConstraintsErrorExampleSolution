@@ -1,0 +1,19 @@
+﻿@typeparam TData where TData : notnull // notnull to desribe that the "main" type must be not null
+
+@if(Data is null)
+{
+    <p>Some loading stuff</p>
+} else
+{
+    @if(ChildContent is not null)
+    {
+        @ChildContent(Data)
+    }
+}
+
+@code {
+    [Parameter]
+    public TData? Data { get; set; } // I can take nullable data
+    [Parameter]
+    public RenderFragment<TData>? ChildContent { get; set; } // And render ChildContent only with loaded data
+}
